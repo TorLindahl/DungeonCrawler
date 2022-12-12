@@ -1,13 +1,13 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://World/WallsTileSet.tres" type="TileSet" id=1]
-[ext_resource path="res://World/DecorTileSet.tres" type="TileSet" id=2]
+[ext_resource path="res://World/Resources/WallsTileSet.tres" type="TileSet" id=1]
+[ext_resource path="res://World/Resources/DecorTileSet.tres" type="TileSet" id=2]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://World/LevelBackGround.png" type="Texture" id=4]
+[ext_resource path="res://World/Images/LevelBackGround.png" type="Texture" id=4]
 
 [node name="Level1" type="Node2D"]
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Floor" type="Sprite" parent="."]
 texture = ExtResource( 4 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 4000, 4000 )

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://World/WallsTileMap.tscn" type="PackedScene" id=1]
+[ext_resource path="res://World/Scenes/Walls.tscn" type="PackedScene" id=1]
 
 [node name="Level3" type="Node2D"]
 
