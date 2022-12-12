@@ -16,24 +16,48 @@ tile_data = PoolIntArray( -655359, 0, 0, -655358, 0, 1, -655357, 0, 1, -655356, 
 
 [node name="Slime" parent="YSort" index="0" instance=ExtResource( 3 )]
 position = Vector2( 28, 59 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Slime2" parent="YSort" index="1" instance=ExtResource( 3 )]
 position = Vector2( 38, 56 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Slime3" parent="YSort" index="2" instance=ExtResource( 3 )]
 position = Vector2( 50, 53 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Slime4" parent="YSort" index="3" instance=ExtResource( 3 )]
 position = Vector2( 48, 63 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Slime5" parent="YSort" index="4" instance=ExtResource( 3 )]
 position = Vector2( 32, 70 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Slime6" parent="YSort" index="5" instance=ExtResource( 3 )]
 position = Vector2( 59, 72 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Slime7" parent="YSort" index="6" instance=ExtResource( 3 )]
 position = Vector2( 71, 64 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Slime8" parent="YSort" index="7" instance=ExtResource( 3 )]
 position = Vector2( 71, 48 )
+__meta__ = {
+"_edit_group_": true
+}

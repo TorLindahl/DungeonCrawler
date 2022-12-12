@@ -74,7 +74,7 @@ func run_attack(deltaTime):
 		var velocity = delta.normalized() * 40.0 * deltaTime * 60.0
 		velocity = move_and_slide( velocity )
 
-func run_die(deltaTime):
+func run_die(_deltaTime):
 	pass
 	
 func _on_Eyesight_body_entered(body):
@@ -84,9 +84,8 @@ func _on_Eyesight_body_entered(body):
 			state = CRAWL
 			anim.current_animation = "Jump"
 			anim.seek(0.0)
-			eye.monitoring = false
-	#print("Entered" + str(body.position) )
-
+			eye.set_deferred("monitoring" , false )
+	
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "Jump":
 		anim.current_animation = "Idle"
@@ -96,5 +95,3 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		shadow.hide()
 		slime.emitting = false
 		queue_free()
-
-

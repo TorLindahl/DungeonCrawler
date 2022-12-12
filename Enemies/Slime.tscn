@@ -10,7 +10,7 @@ height = 2.0
 
 [sub_resource type="Animation" id=9]
 resource_name = "Die"
-length = 0.2
+length = 0.8
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:scale")
 tracks/0/interp = 1
@@ -18,7 +18,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
+"times": PoolRealArray( 0, 0.8 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 1, 1 ), Vector2( 1, 1e-05 ) ]
@@ -30,7 +30,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2 ),
+"times": PoolRealArray( 0, 0.8 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, -6 ), Vector2( 0, 0 ) ]
@@ -174,9 +174,9 @@ emission_shape = 2
 emission_box_extents = Vector3( 4, 1, 0 )
 flag_disable_z = true
 direction = Vector3( 0, -1, 0 )
-spread = 26.27
+spread = 56.08
 gravity = Vector3( 0, 98, 0 )
-initial_velocity = 41.56
+initial_velocity = 67.04
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 color = Color( 0.356863, 0.827451, 0.223529, 1 )
@@ -186,9 +186,6 @@ hue_variation_random = 0.15
 
 [node name="Slime" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Sprite" parent="." index="1"]
 position = Vector2( 0, -6 )
@@ -221,6 +218,7 @@ shape = SubResource( 5 )
 [node name="Particles" type="Particles2D" parent="." index="5"]
 emitting = false
 amount = 200
+one_shot = true
 explosiveness = 0.4
 randomness = 0.47
 process_material = SubResource( 6 )
