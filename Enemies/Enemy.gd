@@ -21,3 +21,8 @@ func player_hit( damage ):
 
 func set_state( new_state ):
 	state = new_state
+
+func get_hurt_level():
+	if state == DIE:
+		return 0
+	return 25

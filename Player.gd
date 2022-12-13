@@ -4,7 +4,8 @@ class_name Player
 enum {
 	RUN,
 	ATTACK,
-	HIT
+	HIT,
+	DIE
 }
 
 var velocity = Vector2.ZERO
@@ -12,15 +13,28 @@ var direction = Vector2(1,0)
 export(int) var maxSpeed = 3000
 var state = RUN
 
-var immortalTime = 0.0
+var hitTime = 0.0
 var knockBackTime = 0.0
+var health = 100
 
 onready var sprite: = $Sprite
 onready var anim: = $AnimationPlayer
 onready var blood: = $Particles2D
 
 func _ready():
-	anim.play("IdleDown")
+	restart()
+
+func restart():
+	position = Vector2.ZERO
+	anim.play("IdleRight")
+	health = 100
+	set_state(RUN)
+	blood.emitting = false
+	sprite.visible = true		
+	knockBackTime = 0.0
+	hitTime = 0.0
+	direction = Vector2(1,0)
+	velocity = Vector2.ZERO
 
 func _physics_process(deltaTime):
 	if state == RUN:
@@ -38,12 +52,27 @@ func set_state(newstate):
 	elif newstate == HIT:
 		anim.play("Idle" + get_direction_string() )
 		anim.seek(0)
-		immortalTime = 2.0
+		hitTime = 2.0
 		blood.emitting = true
 	elif newstate == RUN:
 		sprite.visible = true
+	elif newstate == DIE:
+		sprite.visible = true		
+		anim.play("Die")
+		anim.seek(0)
 				
 	state = newstate
+
+func take_hit( hitvalue ):
+	if state == HIT:
+		return
+	
+	health -= hitvalue
+	if health > 0:
+		set_state(HIT)
+	else:
+		set_state(DIE)
+
 
 func run_state(deltaTime):
 	move(deltaTime)
@@ -67,13 +96,13 @@ func hit_state(deltaTime):
 		anim.current_animation = ("Idle" + get_direction_string() )
 	else:
 		anim.current_animation = ("Run" + get_direction_string() )
-	
-	immortalTime -= deltaTime
 
-	if immortalTime <= 0.0:
+	# count down hit time. flash while in HIT state, and return to RUN after	
+	hitTime -= deltaTime
+	if hitTime <= 0.0:
 		set_state( RUN )
 	else:
-		sprite.visible = (( int( immortalTime*6 ) % 2) == 0)
+		sprite.visible = (( int( hitTime*6 ) % 2) == 0)
 		
 func move(deltaTime):
 	var input = Vector2.ZERO
@@ -110,12 +139,15 @@ func _on_AttackArea_body_entered(body):
 # called if body entered our hit box
 func _on_HitArea_body_entered(body):
 	if body is Enemy:
-		if immortalTime <= 0.0:
-			set_state(HIT)
+		if body.get_hurt_level() > 0:
+			take_hit( body.get_hurt_level() )
+
 			
 func _on_AnimationPlayer_animation_finished(_anim_name):
 	if state == ATTACK:
 		set_state(RUN)
 		return
-	
+	if state == DIE:
+		restart()
+		return
 

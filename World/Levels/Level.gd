@@ -1,16 +1,32 @@
 extends Node
 
+onready var startElevator: = $StartElevator
+onready var endElevator: = $EndElevator
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+export(int) var nextLevel = 0
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	startElevator.set_state( Elevator.OPEN )
+	endElevator.set_state( Elevator.CLOSED )
 
+func _on_DoorArea_body_entered(body):
+	if body is Player:
+		endElevator.set_state( Elevator.OPEN )
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _on_DoorArea_body_exited(body):
+	if body is Player:
+		endElevator.set_state( Elevator.CLOSED )
+
+func _on_EndArea_body_entered(body):
+	if body is Player:
+		end_level()
+
+func end_level():
+	
+	# go to next level
+	if nextLevel != 0:
+		var _val = get_tree().change_scene("res://World/Levels/Level" + str(nextLevel) + ".tscn" )
+	else:
+		print("end of game")
+		# end of game
+	
