@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://World/Levels/Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World/Scenes/Decor.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Enemies/Slime.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://World/Scenes/Walls.tscn" type="PackedScene" id=5]
 
 [node name="Level2" instance=ExtResource( 1 )]
@@ -26,46 +25,12 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="YSort" type="YSort" parent="." index="4"]
+[node name="StartElevator" parent="." index="3"]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Player" parent="YSort" index="0" instance=ExtResource( 4 )]
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Slime" parent="YSort" index="1" instance=ExtResource( 3 )]
-position = Vector2( -275, 4 )
-
-[node name="Slime2" parent="YSort" index="2" instance=ExtResource( 3 )]
-position = Vector2( -140, 178 )
-
-[node name="Slime3" parent="YSort" index="3" instance=ExtResource( 3 )]
-position = Vector2( 303, -28 )
-
-[node name="Slime4" parent="YSort" index="4" instance=ExtResource( 3 )]
-position = Vector2( -78, -78 )
-
-[node name="Slime5" parent="YSort" index="5" instance=ExtResource( 3 )]
-position = Vector2( -180, -80 )
-
-[node name="Slime6" parent="YSort" index="6" instance=ExtResource( 3 )]
-position = Vector2( -67, 134 )
-
-[node name="Slime7" parent="YSort" index="7" instance=ExtResource( 3 )]
-position = Vector2( 146, 175 )
-
-[node name="Slime8" parent="YSort" index="8" instance=ExtResource( 3 )]
-position = Vector2( 142, -118 )
-
-[node name="StartElevator" parent="." index="5"]
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="EndElevator" parent="." index="6"]
+[node name="EndElevator" parent="." index="4"]
 position = Vector2( 352, 96 )
 __meta__ = {
 "_edit_lock_": true
@@ -80,3 +45,27 @@ __meta__ = {
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="Slime" parent="Characters" index="0" instance=ExtResource( 3 )]
+position = Vector2( -275, 4 )
+
+[node name="Slime2" parent="Characters" index="1" instance=ExtResource( 3 )]
+position = Vector2( -140, 178 )
+
+[node name="Slime3" parent="Characters" index="2" instance=ExtResource( 3 )]
+position = Vector2( 303, -28 )
+
+[node name="Slime4" parent="Characters" index="3" instance=ExtResource( 3 )]
+position = Vector2( -78, -78 )
+
+[node name="Slime5" parent="Characters" index="4" instance=ExtResource( 3 )]
+position = Vector2( -180, -80 )
+
+[node name="Slime6" parent="Characters" index="5" instance=ExtResource( 3 )]
+position = Vector2( -67, 134 )
+
+[node name="Slime7" parent="Characters" index="6" instance=ExtResource( 3 )]
+position = Vector2( 146, 175 )
+
+[node name="Slime8" parent="Characters" index="7" instance=ExtResource( 3 )]
+position = Vector2( 142, -118 )

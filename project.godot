@@ -36,6 +36,10 @@ config/name="Dungeon Crawler"
 run/main_scene="res://World/Levels/Level1.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+GlobalVars="*res://World/GlobalVars.gd"
+
 [display]
 
 window/size/width=256

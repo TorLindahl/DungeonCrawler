@@ -2,6 +2,7 @@ extends KinematicBody2D
 class_name Player
 
 enum {
+	START,
 	RUN,
 	ATTACK,
 	HIT,
@@ -15,26 +16,19 @@ var state = RUN
 
 var hitTime = 0.0
 var knockBackTime = 0.0
-var health = 30
 
 onready var sprite: = $Sprite
 onready var anim: = $AnimationPlayer
 onready var blood: = $Particles2D
-onready var healthSprite: = $Camera2D/CanvasLayer/Health
 
 func _ready():
 	restart()
 
-func update_health_sprite():
-	var h = int(health/10)
-	healthSprite.region_rect = Rect2( 1, 97, h*4, 3 )
-
 func restart():
 	position = Vector2.ZERO
 	anim.play("IdleRight")
-	health = 30
-	update_health_sprite()
-	set_state(RUN)
+	GlobalVars.playerHealth = 30
+	set_state(START)
 	blood.emitting = false
 	sprite.visible = true		
 	knockBackTime = 0.0
@@ -49,6 +43,8 @@ func _physics_process(deltaTime):
 		attack_state(deltaTime)
 	elif state == HIT:
 		hit_state(deltaTime)
+	elif state == START:
+		start_state(deltaTime)
 
 func set_state(newstate):
 	if newstate == ATTACK:
@@ -66,20 +62,18 @@ func set_state(newstate):
 		sprite.visible = true		
 		anim.play("Die")
 		anim.seek(0)
-				
+	elif newstate == START:
+		sprite.visible = true
 	state = newstate
 
 func take_hit( hitvalue ):
-	if state == HIT:
+	if state == HIT or state == DIE or hitTime > 0.0:
 		return
-	
-	health -= hitvalue
-	if health > 0:
+	GlobalVars.deductPlayerHealth( hitvalue )
+	if GlobalVars.playerHealth > 0:
 		set_state(HIT)
 	else:
 		set_state(DIE)
-	
-	update_health_sprite()
 
 
 func run_state(deltaTime):
@@ -92,6 +86,9 @@ func run_state(deltaTime):
 
 	if Input.is_action_just_pressed("primary_attack"):
 		set_state( ATTACK )
+	
+func start_state(_deltaTime):
+	pass
 	
 func attack_state(_deltaTime):
 	pass
