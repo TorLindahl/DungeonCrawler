@@ -1,11 +1,16 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://Player.png" type="Texture" id=2]
+[ext_resource path="res://CameraShader.tres" type="Shader" id=3]
 
 [sub_resource type="CapsuleShape2D" id=3]
 radius = 1.0
 height = 4.0
+
+[sub_resource type="ShaderMaterial" id=25]
+shader = ExtResource( 3 )
+shader_param/fade = 1.0
 
 [sub_resource type="Animation" id=13]
 resource_name = "AttackDown"
@@ -793,6 +798,26 @@ visible = false
 current = true
 smoothing_enabled = true
 smoothing_speed = 7.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+
+[node name="ScreenEffect" type="ColorRect" parent="Camera2D/CanvasLayer"]
+material = SubResource( 25 )
+margin_right = 256.0
+margin_bottom = 192.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Health" type="Sprite" parent="Camera2D/CanvasLayer"]
+position = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 1, 97, 39, 3 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0.5, 0 )

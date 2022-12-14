@@ -15,19 +15,25 @@ var state = RUN
 
 var hitTime = 0.0
 var knockBackTime = 0.0
-var health = 100
+var health = 30
 
 onready var sprite: = $Sprite
 onready var anim: = $AnimationPlayer
 onready var blood: = $Particles2D
+onready var healthSprite: = $Camera2D/CanvasLayer/Health
 
 func _ready():
 	restart()
 
+func update_health_sprite():
+	var h = int(health/10)
+	healthSprite.region_rect = Rect2( 1, 97, h*4, 3 )
+
 func restart():
 	position = Vector2.ZERO
 	anim.play("IdleRight")
-	health = 100
+	health = 30
+	update_health_sprite()
 	set_state(RUN)
 	blood.emitting = false
 	sprite.visible = true		
@@ -72,6 +78,8 @@ func take_hit( hitvalue ):
 		set_state(HIT)
 	else:
 		set_state(DIE)
+	
+	update_health_sprite()
 
 
 func run_state(deltaTime):
@@ -134,7 +142,7 @@ func get_direction_string():
 # called if a body entered our attack area
 func _on_AttackArea_body_entered(body):
 	if body is Enemy:
-		body.player_hit(100)
+		body.player_hit(10)
 
 # called if body entered our hit box
 func _on_HitArea_body_entered(body):

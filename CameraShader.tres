@@ -1,0 +1,20 @@
+[gd_resource type="Shader" load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+
+[resource]
+code = "shader_type canvas_item;
+
+uniform float fade = 1.0;
+
+void fragment()
+{
+	// create normalized coord with origin in the center of the screen
+	vec2 pixel_pos = vec2(SCREEN_UV.x-0.5, (SCREEN_UV.y-0.5) * 0.75 );
+
+	// calculate the light for the pixel
+	float light = smoothstep( 0.6 , 0.8 , fade - length(pixel_pos) );
+
+	COLOR = vec4(texture(SCREEN_TEXTURE, SCREEN_UV).xyz * light, 1.0);
+}"
+script = SubResource( 1 )

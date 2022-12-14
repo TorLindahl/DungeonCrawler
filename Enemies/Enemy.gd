@@ -10,7 +10,7 @@ enum {
 
 var state = IDLE
 
-var health = 100
+var health = 10
 
 func player_hit( damage ):
 	if health <= 0:
@@ -25,4 +25,4 @@ func set_state( new_state ):
 func get_hurt_level():
 	if state == DIE:
 		return 0
-	return 25
+	return 10
